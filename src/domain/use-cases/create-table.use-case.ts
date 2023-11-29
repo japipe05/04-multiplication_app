@@ -17,8 +17,9 @@ export class CreateTable implements CreateTableUseCase{
     execute({base, limit=10}: CreateTableOptions){
         let outputMEsagge='';
         for (let i = 1; i <= limit ; i++) {
-            outputMEsagge += `${base} x ${i} = ${base * i }\n`;
+            outputMEsagge += `${base} x ${i} = ${base * i }`;
         //    console.log(tabla,'x',i,'=',i*tabla);    
+        if(i<limit) outputMEsagge += '\n';
         }
         return outputMEsagge;
     }
