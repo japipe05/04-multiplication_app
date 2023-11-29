@@ -1,8 +1,30 @@
-import { describe, test, expect } from '@jest/globals';
+// process.argv = ['node','app.ts','-b', '10'];
+// import './app';
+import { ServerApp } from './presentation/server-app';
+import { describe, test, jest, expect } from '@jest/globals';
 
-describe('App', () => {
-    test('should be true', () => {
-      expect(true).toBe(true);
+
+describe('Test App.ts', () => {
+
+
+  test('should call Server.run with values', async() => {
+    
+    const serverRunMock = jest.fn();
+    ServerApp.run = serverRunMock;
+    process.argv = ['node','app.ts','-b', '10','-l','5','-s','-n','test-file','-d','test-destination'];
+
+    await import('../src/app');
+
+    expect(serverRunMock).toHaveBeenCalledWith({ 
+      base: 10, 
+      limit: 5, 
+      showTable: true, 
+      fileName: 'test-file', 
+      fileDestination: 'test-destination' 
     });
+
+
+  });
+
+
 });
-  
